@@ -1,30 +1,25 @@
-# RPCANet
-**[WACV2024]** Official implementation of paper "RPCANet: Deep Unfolding RPCA Based Infrared Small Target Detection".
-
-
+# MSCoNet
+**[]** “MSCoNet: Iterative Dual-Task Decoupling for Infared Small Target Detection".
 
 ## Abstract
-Deep learning (DL) networks have achieved remarkable performance in infrared small target detection (ISTD). However, these structures exhibit a deficiency in interpretability and are widely regarded as black boxes, as they disregard domain knowledge in ISTD. To alleviate this issue, this work proposes an interpretable deep network for detecting infrared dim targets, dubbed RPCANet. Specifically, our approach formulates the ISTD task as sparse target extraction, low-rank background estimation, and image reconstruction in a relaxed Robust Principle Component Analysis (RPCA) model. By unfolding the iterative optimization updating steps into a deep-learning framework, time-consuming and complex matrix calculations are replaced by theory-guided neural networks. RPCANet detects targets with clear interpretability and preserves the intrinsic image feature, instead of directly transforming the detection task into a matrix decomposition problem. Extensive experiments substantiate the effectiveness of our deep unfolding framework and demonstrate its trustworthy results, surpassing baseline methods in both qualitative and quantitative evaluations.
+Infrared small target detection is crucial in military reconnaissance and other fields, but its small size and the high coupling with complex backgrounds make detection difficult. Existing methods mainly focus on target feature learning, neglecting the key role of background modeling in decoupling. To address this, this paper proposes a dual-task collaborative optimization framework, MSCoNet, which decouples the task into background estimation and target segmentation, and gradually approaches the true distribution of both through multi-stage iterative optimization. Since complex infrared backgrounds commonly have directional texture features, a direction-aware module (DBEM) is designed in background estimation, which uses directional convolution (DDC) to capture directional textures such as clouds, and combines second-order attention to enhance low-contrast modeling. In target segmentation, we construct a background suppression gated unit (BSGU), which dynamically removes background noise through a gating mechanism and channel-level factors. In each stage, the original image is reconstructed by combining the preliminary background and the target, and the accurate background estimation is further calculated based on physical constraints. The updated information is passed to the next stage for iterative optimization. Experiments show that MSCoNet significantly outperforms mainstream methods on three public datasets.
 
 ## Network Architecture
-![overall](https://github.com/fengyiwu98/RPCANet/assets/115853729/03e0efcf-3c81-472e-a591-48a5d79e54ab)
-![network_architecture](https://github.com/fengyiwu98/RPCANet/assets/115853729/85d53cf7-48ca-4099-ba05-943cb9811193)
+![network_architecture](MSCoNet.png)
 
 
 ## Requirements
 - **Python 3.8**
 - **Windows10, Ubuntu18.04 or higher**
-- **NVDIA GeForce RTX 3090**
+- **NVDIA GeForce RTX 4090**
 - **pytorch 1.8.0 or higher**
 - **More details from requirements.txt** 
 
 ## Datasets
 
-**We used NUDT-SIRST, IRSTD-1K and sirst-aug for both training and test. Three datasets can be found and downloaded in: [NUDT-SIRST](https://github.com/YeRen123455/Infrared-Small-Target-Detection), [IRSTD-1K](https://github.com/RuiZhang97/ISNet), [SIRST-Aug](https://github.com/Tianfang-Zhang/AGPCNet). And you can train the model using the dataset we have arranged according to our code settings: [Google Drive](https://drive.google.com/file/d/1rs6ORtekqHmuPEPhyq61iPPVOxx2QF7B/view?usp=drive_link).**
+**We used NUDT-SIRST, IRSTD-1K and sirst-aug for both training and test. Our dataset can be downloaded from this link: （https://pan.baidu.com/s/1_lHOUUr9PW-YJIKCf0Q0XA?pwd=vbuq     Extraction Code: vbuq）.**
  
-**Please first download these datasets and place the 3 datasets to the folder `./datasets/`. More results will be released soon!** 
-
-
+**Please first download these datasets and place the 3 datasets to the folder `./datasets/`. **
 
 * **Our project has the following structure:**
 ```
@@ -80,14 +75,24 @@ $ python t_models.py
 $ python cal_from_mask.py
 ```
 
+## Result
+
+**The weights trained on the three datasets are in the 'Weight' folder：**
+```
+├── ./Weight/
+│    ├── IRSTD-1K/
+│    │   ├── best.pkl
+│    │   ├── log.txt
+│    ├── SIRST-AUG/
+│    │   ├── best.pkl
+│    │   ├── log.txt
+│    ├── SIRST-NUDT/
+│    │   ├── best.pkl
+│    │   ├── log.txt
+
+```
+![result](result.png)
+
 ## Citation
 ```
-@InProceedings{Wu_2024_WACV,
-    author    = {Wu, Fengyi and Zhang, Tianfang and Li, Lei and Huang, Yian and Peng, Zhenming},
-    title     = {RPCANet: Deep Unfolding RPCA Based Infrared Small Target Detection},
-    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-    month     = {January},
-    year      = {2024},
-    pages     = {4809-4818}
-}
 ```
