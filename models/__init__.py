@@ -1,9 +1,9 @@
-from .MSCoNet import *
+from .DCONet import *
 
 
 def get_model(name, net=None):
     if name == 'rpcanet':
-        net = MSCoNet(stage_num=5)
+        net = DCONet(stage_num=5)
     else:
         raise NotImplementedError
 
