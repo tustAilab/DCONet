@@ -23,7 +23,7 @@ def parse_args():
     #
     # Setting parameters
     #
-    parser = ArgumentParser(description='Implement of RPCANet')
+    parser = ArgumentParser(description='Implement of DCONet')
 
     #
     # Dataset parameters
@@ -74,7 +74,7 @@ def parse_args():
         set_seeds(args.seed)
 
     # logger
-    args.logger = setup_logger("Robust PCA Network", args.save_folder, 0, filename='log.txt')
+    args.logger = setup_logger("DCONet", args.save_folder, 0, filename='log.txt')
     return args
 
 
