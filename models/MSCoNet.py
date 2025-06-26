@@ -8,9 +8,9 @@ import numpy as np
 from models.BEM import ULite
 
 
-class MSCoNet(nn.Module):
+class DCONet(nn.Module):
     def __init__(self, stage_num=6, slayers=6, llayers=3, mlayers=2, channel=32, mode='train'):
-        super(MSCoNet, self).__init__()
+        super(DCONet, self).__init__()
         self.stage_num = stage_num
         self.decos = nn.ModuleList()
         self.mode = mode
