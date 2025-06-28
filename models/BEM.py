@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from models.MNA import MNABlock
+from models.SOA import SOABlock
 from models.BottleNeck import MDCR
 class AxialDW(nn.Module):
     def __init__(self, dim, mixer_kernel, dilation=1):
@@ -55,7 +55,7 @@ class BottleNeckBlock(nn.Module):
 
     def __init__(self, dim):
         super().__init__()
-        self.att=MNABlock(dim)
+        self.att=SOABlock(dim)
         # gc = dim // 4
 
         self.mdcr=MDCR(dim,dim)
